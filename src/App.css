@@ -1,9 +1,9 @@
 body {
-  background: url("../public/wall.jpg");
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
+background-image: url(../public/wall.jpg);
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
 }
 
 .container {
