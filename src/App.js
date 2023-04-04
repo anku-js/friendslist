@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import List from "./Components/List"
-import {nanoid} from "nanoid"
+import { nanoid } from "nanoid"
 import './App.css';
 import { AiOutlineSearch } from "react-icons/ai"
 
@@ -29,7 +29,7 @@ function handleSubmit(event) {
 }
 
 function toggleFavourites(id) {
-  setFriendsList(prevArr => prevArr.map(star=> {
+  setFriendsList(friendsList.map( star => {
     return star.id === id ?
     {...star, isFavourite: !star.isFavourite} : star
   }))
@@ -70,29 +70,29 @@ useEffect(() => {
   return (
     <div className="container">
       <header className='header'>
-            <h1>F.R.I.E.N.D.S</h1>
-            <form className='forms'>
-                <div className="showFavourite">
-                    <input 
-                      type="checkbox" 
-                      id="favourites"
-                      checked={filteredFriends.isFavourite}
-                      name={"isFriendly"}
-                      onChange={favouritesFiltered}
+        <h1>F.R.I.E.N.D.S</h1>
+        <form className='forms'>
+          <div className="showFavourite">
+            <input 
+              type="checkbox" 
+              id="favourites"
+              checked={filteredFriends.isFavourite}
+              name={"isFriendly"}
+              onChange={favouritesFiltered}
 
-                    />
-                    <label htmlFor="favourites">Show Favourites</label>
-                </div>
-                <label className="search-label">
-                  <input 
-                    className="search-friend"
-                    type="text" 
-                    placeholder='Search for a friend' 
-                    onChange={searchedFriend}
-                  />
-                  <AiOutlineSearch />
-                </label>                    
-            </form>
+            />
+            <label htmlFor="favourites">Show Favourites</label>
+          </div>
+          <label className="search-label">
+            <input 
+              className="search-friend"
+              type="text" 
+              placeholder='Search for a friend' 
+              onChange={searchedFriend}
+            />
+            <AiOutlineSearch />
+          </label>                    
+        </form>
       </header>
       <form onSubmit={handleSubmit}>
         <label>

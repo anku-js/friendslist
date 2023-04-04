@@ -3,7 +3,7 @@ import { AiFillStar, AiOutlineStar, AiFillDelete } from "react-icons/ai";
 import { TiTick } from "react-icons/ti"
 import { RxCross2 } from "react-icons/rx"
 
-export default function List(props) {
+export default function List({ name, handleConfirmDelete, toggleFavourites, isFavourite }) {
   const [deleteFriend, setDeleteFriend] = useState(false)
 
   function handleDelete() {
@@ -19,7 +19,7 @@ export default function List(props) {
             <button onClick={handleDelete}>
               <RxCross2 />
             </button>
-            <button onClick={props.handleConfirmDelete}>
+            <button onClick={handleConfirmDelete}>
               <TiTick />
             </button>
           </div>
@@ -27,12 +27,12 @@ export default function List(props) {
       ) : (
         <div className="list-container">
           <div className="friend-name-container">
-            <h2 className="friend-name">{props.name}</h2>
+            <h2 className="friend-name">{name}</h2>
             <p className="friend-name-p">is your friend</p> 
           </div>
           <div className="button-container">
-            <button onClick={props.toggleFavourites}>
-              {props.isFavourite? <AiFillStar /> : <AiOutlineStar />}
+            <button onClick={toggleFavourites}>
+              {isFavourite? <AiFillStar /> : <AiOutlineStar />}
             </button>
             <button onClick={handleDelete}>
               <AiFillDelete />
