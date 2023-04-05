@@ -1,23 +1,123 @@
-
+import React, { useState, useEffect } from "react"
+import List from "./Components/List"
+import { nanoid } from "nanoid"
 import './App.css';
+import { AiOutlineSearch } from "react-icons/ai"
 
 function App() {
+  const [friendsList, setFriendsList] = useState([])
+  const [newFriend, setNewFriend] = useState("")
+  const [filteredFriends, setFilteredFriends] = useState([])
+
+function handleChange(event) {
+  const { value } = event.target;
+  setNewFriend(value)
+}
+
+function handleSubmit(event) {
+  event.preventDefault()
+  const friendToBeAdded = {
+    name: newFriend,
+    isFavourite: false,
+    id: nanoid()
+  } 
+    setFriendsList([
+      ...friendsList,
+      friendToBeAdded
+    ])
+    setNewFriend("")    
+}
+
+function toggleFavourites(id) {
+  setFriendsList(friendsList.map( star => {
+    return star.id === id ?
+    {...star, isFavourite: !star.isFavourite} : star
+  }))
+}
+  
+const searchedFriend = (event) => {
+  const { value } = event.target
+
+  if (value !== '') {
+    const results = friendsList.filter((searched) => {
+      return searched.name.toLowerCase().includes(value.toLowerCase());   
+    });
+    setFilteredFriends(results);
+  } else {
+    setFilteredFriends(friendsList); 
+  } 
+};
+
+const favouritesFiltered= (event) => {
+  const { checked } = event.target
+  if (checked) {
+    const favouritesList = filteredFriends.filter((starred) => starred.isFavourite === true)
+    setFilteredFriends(favouritesList);
+  } else {
+    setFilteredFriends(friendsList)
+  }
+}
+
+function handleConfirmDelete(id) {
+  const newState = friendsList.filter((friend)=> friend.id !== id)
+  setFriendsList(newState)
+}
+
+useEffect(() => {
+  setFilteredFriends(friendsList)
+}, [friendsList])
+
   return (
     <div className="container">
       <header className='header'>
-        <h1><u>Friends List</u></h1>
+        <h1>F.R.I.E.N.D.S</h1>
         <form className='forms'>
-          <div>
-           <input type="checkbox"/>
-           <label>Show Favourites</label>
-           </div>
-           <input type="text" placeholder='Search for a friend' />
-           <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M909.6 854.5L649.9 594.8C690.2 542.7 712 479 712 412c0-80.2-31.3-155.4-87.9-212.1-56.6-56.7-132-87.9-212.1-87.9s-155.5 31.3-212.1 87.9C143.2 256.5 112 331.8 112 412c0 80.1 31.3 155.5 87.9 212.1C256.5 680.8 331.8 712 412 712c67 0 130.6-21.8 182.7-62l259.7 259.6a8.2 8.2 0 0 0 11.6 0l43.6-43.5a8.2 8.2 0 0 0 0-11.6zM570.4 570.4C528 612.7 471.8 636 412 636s-116-23.3-158.4-65.6C211.3 528 188 471.8 188 412s23.3-116.1 65.6-158.4C296 211.3 352.2 188 412 188s116.1 23.2 158.4 65.6S636 352.2 636 412s-23.3 116.1-65.6 158.4z"></path></svg>
+          <div className="showFavourite">
+            <input 
+              type="checkbox" 
+              id="favourites"
+              checked={filteredFriends.isFavourite}
+              name={"isFriendly"}
+              onChange={favouritesFiltered}
+
+            />
+            <label htmlFor="favourites">Show Favourites</label>
+          </div>
+          <label className="search-label">
+            <input 
+              className="search-friend"
+              type="text" 
+              placeholder='Search for a friend' 
+              onChange={searchedFriend}
+            />
+            <AiOutlineSearch />
+          </label>                    
         </form>
       </header>
-      <main>
-        <input type="text" name="friendName" placeholder="Enter Your friend's name" />
-      </main>
+      <form onSubmit={handleSubmit}>
+        <label>
+          <input 
+            className="add-friend-input"
+            type="text"
+            name="friend"
+            placeholder="Enter your Friend's name"
+            onChange={handleChange}
+            value={newFriend}
+          />
+        </label>
+      </form>
+      <div>
+        { filteredFriends.map( (mapped) => 
+          <List 
+            name={mapped.name} 
+            toggleFavourites={ () => toggleFavourites(mapped.id)} 
+            isFavourite={mapped.isFavourite} 
+            key={mapped.id}
+            id={mapped.id}
+            handleConfirmDelete={ () => handleConfirmDelete(mapped.id)}
+          />
+        )}
+      </div> 
     </div>
   );
 }
