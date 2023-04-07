@@ -9,13 +9,15 @@ export default function List({ name, handleConfirmDelete, toggleFavourites, isFa
   function handleDelete() {
     setDeleteFriend(prev => !prev)
   }
-
+  const styles = {
+    zIndex : deleteFriend ? 1 : 0
+  }
   return (
     <div className="friends"> 
       { deleteFriend ? (
         <div className="delete-container">
-          <p className="delete-container-p">Are you sure you want to delete?</p>
-          <div className="delete-button">
+          <p className="delete-container-p">Are you sure you want to remove <strong>{name}</strong> from your friend list ?</p>
+          <div>
             <button onClick={handleDelete}>
               <RxCross2 />
             </button>
@@ -30,7 +32,7 @@ export default function List({ name, handleConfirmDelete, toggleFavourites, isFa
             <h2 className="friend-name">{name}</h2>
             <p className="friend-name-p">is your friend</p> 
           </div>
-          <div className="button-container">
+          <div>
             <button onClick={toggleFavourites}>
               {isFavourite? <AiFillStar /> : <AiOutlineStar />}
             </button>

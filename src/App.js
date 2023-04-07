@@ -5,7 +5,8 @@ import './App.css';
 import { AiOutlineSearch } from "react-icons/ai"
 
 function App() {
-  const [friendsList, setFriendsList] = useState([])
+ const friendsFromLocalStorage = JSON.parse(localStorage.getItem("friends"));
+  const [friendsList, setFriendsList] = useState( friendsFromLocalStorage ? friendsFromLocalStorage : [] )
   const [newFriend, setNewFriend] = useState("")
   const [filteredFriends, setFilteredFriends] = useState([])
 
@@ -65,27 +66,30 @@ function handleConfirmDelete(id) {
 
 useEffect(() => {
   setFilteredFriends(friendsList)
+  localStorage.setItem("friends", JSON.stringify(friendsList))
+  
 }, [friendsList])
 
   return (
     <div className="container">
       <header className='header'>
         <h1>F.R.I.E.N.D.S</h1>
-        <form className='forms'>
+        <form className='filter-container'>
           <div className="showFavourite">
-            <input 
-              type="checkbox" 
-              id="favourites"
-              checked={filteredFriends.isFavourite}
-              name={"isFriendly"}
-              onChange={favouritesFiltered}
-
-            />
-            <label htmlFor="favourites">Show Favourites</label>
+            <label htmlFor="favourites" className="showFavourite">
+              <input 
+                type="checkbox" 
+                id="favourites"
+                checked={filteredFriends.isFavourite}
+                name={"isFriendly"}
+                onChange={favouritesFiltered}
+              />
+              Show Favourites
+            </label>
           </div>
-          <label className="search-label">
+          <label className="search-friend-label">
             <input 
-              className="search-friend"
+              className="search-friend-input"
               type="text" 
               placeholder='Search for a friend' 
               onChange={searchedFriend}
