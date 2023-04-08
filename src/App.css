@@ -16,7 +16,7 @@ min-height: 100vh;
   background: #bcb1b4;
   opacity: 0.95;
   border-radius: 5px;
-  margin: 50px;
+  margin-top: 50px;
   box-shadow: 2px 2px #86777b;
 }
 
@@ -126,12 +126,14 @@ button {
     flex-direction: column;
     margin: 20px 0px 0px 0px;
   }
+
   .header {
     display: flex;
     flex-direction: column;
     gap: 10px;
     padding: 10px;   
   }
+
   .filter-container {
     display: flex;
     justify-content: center;
@@ -140,6 +142,11 @@ button {
     gap: 20px;  
     padding: 10px;
   } 
+
+  .delete-container-p { 
+    font-size: 10px;
+    width: 160px;
+  }
 }
  
   
