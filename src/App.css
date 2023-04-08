@@ -17,16 +17,15 @@ min-height: 100vh;
   opacity: 0.95;
   border-radius: 5px;
   margin: 50px;
-  width: 600px;
   box-shadow: 2px 2px #86777b;
 }
 
 .header {
-  color: rgba(2, 2, 2, 0.979);
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 20px;
+  gap: 200px;
 }
 
 h1 {
@@ -49,8 +48,7 @@ h1 {
   justify-content: center;
   align-items: center;
   font-size: 12px;
-  gap: 2px;
-  
+  gap: 2px; 
 }
 
 .search-friend-input {
@@ -106,9 +104,9 @@ button {
   border: 2px solid #8d7b6b;
   border-radius: 3px;
   background: #b3a59a;
-  padding: 8px 14px;
+  padding: 6px 12px;    
   margin: 5px;
-  font-size: 20px;
+  font-size: 14px;
 }
 
 .delete-container {
@@ -122,10 +120,30 @@ button {
   opacity: 1;
 }
 
-.react-icons {
-  width: 20px;
+@media screen and (max-width: 1080px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0px 0px 0px;
+  }
+  .header {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;   
+  }
+  .filter-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    font-size: 12px;
+    gap: 20px;  
+    padding: 10px;
+  } 
 }
-
+ 
+  
+ 
 
 
 
