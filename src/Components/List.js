@@ -18,10 +18,10 @@ export default function List({ name, handleConfirmDelete, toggleFavourites, isFa
         <div className="delete-container">
           <p className="delete-container-p">Are you sure you want to remove <strong>{name}</strong> from your friend list ?</p>
           <div>
-            <button onClick={handleDelete}>
+            <button name="cross" onClick={handleDelete}>
               <RxCross2 />
             </button>
-            <button onClick={handleConfirmDelete}>
+            <button name="tick" onClick={handleConfirmDelete}>
               <TiTick />
             </button>
           </div>
@@ -33,10 +33,10 @@ export default function List({ name, handleConfirmDelete, toggleFavourites, isFa
             <p className="friend-name-p">is your friend</p> 
           </div>
           <div>
-            <button onClick={toggleFavourites}>
+            <button name="star" onClick={toggleFavourites}>
               {isFavourite? <AiFillStar /> : <AiOutlineStar />}
             </button>
-            <button onClick={handleDelete}>
+            <button name="delete" onClick={handleDelete}>
               <AiFillDelete />
             </button>
           </div>
